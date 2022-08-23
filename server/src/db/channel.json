@@ -1,0 +1,5 @@
+{
+    "channel" : "Lobby",
+    "desc": "Channel d'accueil ! Taper /help pour afficher les commandes ou /list pour voir les channels disponnibles",
+    "creator" : "Admin"
+}
