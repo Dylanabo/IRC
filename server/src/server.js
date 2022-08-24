@@ -4,10 +4,10 @@ const cors = require('cors');
 
 const http = require('http');
 const server = http.createServer(app);
-const  Server = require("socket.io");
-const io = Server(server,{ 
+const Server = require("socket.io");
+const io = Server(server, {
     cors: {
-      origin: 'http://localhost:3000'
+        origin: 'http://localhost:3000'
     }
 })
 
@@ -35,28 +35,6 @@ app.use((_, res, next) => {
     next();
 });
 
-// app.get('/', (req, res) => {
-//     res.send('SERVEUR my_irc => SERVER ON')
-// })
-
-// app.post('/login', (request, response) => {
-//     response.setHeader('Content-Type', 'text/plain');
-//     let username = request.body.username;
-//     let password = request.body.password;
-//     sequelize.query("SELECT * FROM user WHERE name = '" + username + "' AND password = '" + password + "'").then(([results, metadata]) => {
-//         console.log(results);
-//         console.log(results.length);
-//         if (results.length > 0) {
-//             // Authenticate the user
-//             //            request.session.username = username;
-//             // Redirect to home page
-//             return response.send('Connected');
-//         } else {
-//             response.send('Incorrect Username and/or Password!');
-//         }
-//     })
-// })
-
 server.listen(8079, () => {
     console.log("Server up and running to port 8079")
 })
@@ -67,32 +45,59 @@ var STATIC_CHANNELS = [{
     name: 'Global chat 1',
     participants: 0,
     id: 1,
+    listParticipants: [],
     sockets: []
 }, {
     name: 'Global chat 2',
     participants: 0,
     id: 2,
+    listParticipants: [],
     sockets: []
 }];
 
+var users = [{}];
+
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    console.log(socket.id, 'a user connected');
+    
+    socket.on('connect_me', username => {
+        let room = (0)
+        let user = {name: username, id_user: socket.id, channel: room};
+        users.push(user);
+    })
+
     //socket.join('lobby');
-    socket.on('channel-join', id => {
+    //    if (socket.id != )
+    socket.on('channel-join', data => {
+        let id = data.id
         console.log('channel join', id);
+        console.log('user join', data);
+// function quand le mec join, on dit a la list d'user qu'il a join un channel
+
+
+        
         STATIC_CHANNELS.forEach(c => {
             if (c.id === id) {
                 if (c.sockets.indexOf(socket.id) == (-1)) {
                     c.sockets.push(socket.id);
                     c.participants++;
+                    let user = {login : data.login};
+                    c.listParticipants.push(user);
+                    console.log(c)
                     io.emit('channel', c);
+                    io.emit('users', STATIC_CHANNELS);
                 }
             } else {
                 let index = c.sockets.indexOf(socket.id);
                 if (index != (-1)) {
                     c.sockets.splice(index, 1);
                     c.participants--;
+                    console.log("DEBUF", c.listParticipants);
+                    c.listParticipants = c.listParticipants.filter(c => c.login != data.login);
+                    console.log("DEBUF 2 ", c.listParticipants);
+
                     io.emit('channel', c);
+                    io.emit('users', STATIC_CHANNELS);
                 }
             }
         });
@@ -105,6 +110,24 @@ io.on('connection', (socket) => {
         io.emit('message', message);
     });
 
+    socket.on('get-user-room', channel => {
+        console.log("Info Room user received ", channel.channel);
+        io.emit('new_channel', new_chan);
+    });
+
+    socket.on('create-channel', channel => {
+        console.log("Channel received ", channel.channel);
+        let new_chan = {
+            name: channel.channel,
+            participants: 0,
+            id: ((STATIC_CHANNELS.length) + 1),
+            listParticipants: [],
+            sockets: []
+        }
+        STATIC_CHANNELS.push(new_chan);
+        io.emit('new_channel', new_chan);
+    });
+
     socket.on('disconnect', () => {
         console.log('user disconnected');
         STATIC_CHANNELS.forEach(c => {
@@ -115,12 +138,12 @@ io.on('connection', (socket) => {
                 io.emit('channel', c);
             }
         });
-      });
+    });
 });
 
-setInterval(()=>{
+setInterval(() => {
     io.to('lobby').emit('time', new Date())
-},1000)
+}, 1000)
 
 
 app.get('/getChannels', (req, res) => {
