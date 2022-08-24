@@ -1,0 +1,107 @@
+.list-wrapper {
+    max-width: 300px;
+}
+
+.list {
+    background: white;
+    border-radius: 2px;
+    list-style: none;
+    padding: 10px 20px;
+}
+
+.list-item {
+    display: flex;
+    margin: 1px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.list-item-image {
+    border-radius: 50%;
+    width: 64px;
+}
+
+.list-item-content {
+    margin-left: 20px;
+}
+
+.list-item-content h4,
+.list-item-content p {
+    margin: 0;
+}
+
+.list-item-content h4 {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+.list-item-content p {
+    margin-top: 5px;
+    color: rgb(212, 210, 210);
+}
+
+.designwrap {
+    width: 100%;
+    background: black;
+}
+
+.design {
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 1.5em;
+    color: #2af560;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 3px;
+    font-weight: 40;
+    text-transform: uppercase;
+    transition: all ease-in-out 0.3s;
+    display: inline;
+    text-shadow:
+        1px 1px 0 rgba(23, 23, 23, 1),
+        2px 2px 0 rgba(23, 23, 23, 0.9),
+        3px 3px 0 rgba(23, 23, 23, 0.8),
+        4px 4px 0 rgba(23, 23, 23, 0.7),
+        5px 5px 0 rgba(23, 23, 23, 0.6),
+        6px 6px 0 rgba(23, 23, 23, 0.5),
+        7px 7px 0 rgba(23, 23, 23, 0.4),
+        8px 8px 0 rgba(23, 23, 23, 0.3),
+        9px 9px 0 rgba(23, 23, 23, 0.2),
+        10px 10px 0 rgba(23, 23, 23, 0.1),
+        11px 11px 0 rgba(23, 23, 23, 0.09),
+        12px 12px 0 rgba(23, 23, 23, 0.08),
+        13px 13px 0 rgba(23, 23, 23, 0.07),
+        14px 14px 0 rgba(23, 23, 23, 0.06),
+        15px 15px 0 rgba(23, 23, 23, 0.05),
+        16px 16px 0 rgba(23, 23, 23, 0.04),
+        17px 17px 0 rgba(23, 23, 23, 0.03),
+        18px 18px 0 rgba(23, 23, 23, 0.02),
+        19px 19px 0 rgba(23, 23, 23, 0.01),
+        20px 20px 0 rgba(23, 23, 23, 0.0),
+        -15px 20px 10px rgba(23, 23, 23, 0.05);
+}
+
+
+.design:hover {
+    text-shadow:
+    1px 1px 0 rgba(23, 23, 23, 1),
+    3px 3px 0 rgba(23, 23, 23, 0.9),
+    5px 5px 0 rgba(23, 23, 23, 0.8),
+    7px 7px 0 rgba(23, 23, 23, 0.7),
+    9px 9px 0 rgba(23, 23, 23, 0.6),
+    11px 11px 0 rgba(23, 23, 23, 0.5),
+    13px 13px 0 rgba(23, 23, 23, 0.4),
+    15px 15px 0 rgba(23, 23, 23, 0.3),
+    17px 17px 0 rgba(23, 23, 23, 0.2),
+    19px 19px 0 rgba(23, 23, 23, 0.1);
+    margin: 0 0 0 50px;
+    border-bottom: 5px solid;
+}
+
+.designwrap:hover .I {
+    opacity: 1;
+}

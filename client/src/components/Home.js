@@ -15,7 +15,7 @@ class Channel extends React.Component {
         return (
             <div className='channel-item' onClick={this.click}>
                 <div>{this.props.name} <span className="right">{this.props.participants}</span></div>
-                
+
             </div>
         )
     }
@@ -30,7 +30,7 @@ class ChannelList extends React.Component {
         };
         this.onChange = this.onChange.bind(this);
     }
-    
+
     handleClick = id => {
         this.props.onSelectChannel(id);
     }
@@ -73,14 +73,26 @@ class ChannelList extends React.Component {
                 <div className="roomaker">
                     <input type="text" value={this.state.NewRoom} onChange={this.onChange} />
                     <button type="submit" id="createButton" onClick={this.onClick}>Create Room</button>
+                    {/* <div className="roomaker">
+
+
+<input className="c-checkbox" type="checkbox" id="checkbox"/>
+    <div className="c-formContainer">
+            <input className="c-form__input" value={this.state.NewRoom} onChange={this.onChange} placeholder="Name" type="text" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required/>
+                <label className="c-form__buttonLabel" for="checkbox">
+                    <button className="c-form__button" type="button" onClick={this.onClick}>Crée</button>
+                </label>
+                <label className="c-form__toggle glow-on-hover" for="checkbox" data-title="Create Room">Create Room</label>
+    </div>
+</div> */}
                 </div>
             </div>
-            );
+        );
     }
 
 }
 
-class Home extends React.Component  {
+class Home extends React.Component {
 
     state = {
         channels: null,
@@ -92,11 +104,11 @@ class Home extends React.Component  {
     }
     socket;
     componentDidMount() {
-        this.setState({login: Storage.getItem("unique_id")});
+        this.setState({ login: Storage.getItem("unique_id") });
         this.loadChannels();
         if (!this.state.connect) {
             this.loadSocket();
-            this.setState({connect: true})
+            this.setState({ connect: true })
         }
     }
 
@@ -106,9 +118,9 @@ class Home extends React.Component  {
             this.setState({ channels: data.channels });
         })
     }
-    
+
     loadSocket = () => {
-        const socket = io.connect('http://localhost:8079', {reconnection:false})
+        const socket = io.connect('http://localhost:8079', { reconnection: false })
 
         console.log("connect");
         socket.on('connect', () => {
@@ -138,7 +150,7 @@ class Home extends React.Component  {
             user.forEach(c => {
                 if (this.state.channel.id) {
                     if (c.id === this.state.channel.id) {
-                        this.setState({users: c.listParticipants});
+                        this.setState({ users: c.listParticipants });
                     }
                 }
             });
@@ -162,14 +174,14 @@ class Home extends React.Component  {
             this.setState({ channels });
 
         });
-        socket.emit("connect_me", {user: this.state.login})
+        socket.emit("connect_me", { user: this.state.login })
 
         this.socket = socket;
     }
 
     handleCreateChannel = (NewRoom) => {
         console.log("Channel", NewRoom)
-        this.socket.emit("create-channel", {channel: NewRoom})
+        this.socket.emit("create-channel", { channel: NewRoom })
     }
 
 
@@ -182,7 +194,7 @@ class Home extends React.Component  {
             return c.id === id;
         });
         this.setState({ channel });
-        var data = {login: this.state.login, id: id};
+        var data = { login: this.state.login, id: id };
         this.socket.emit('channel-join', data);
         console.log("chanel sele", channel)
     }
@@ -191,24 +203,24 @@ class Home extends React.Component  {
 
         return (
             <div className="Home">
-            <h1 id="welcome">Bienvenue {this.state.login}</h1>
-            <div className="container" >
-                <div className="roomlist">
-                    <ChannelList channels={this.state.channels} onSelectChannel={this.handleChannelSelect} onCreateChannel={this.handleCreateChannel}/>
-                </div>
-
-                <div className="content">
-                    <div className="bottom">
-                    <Room onSendMessage={this.handleSendMessage} channel={this.state.channel} login={this.state.login} />
+                <h1 className="welcome" id="welcome">Bienvenue {this.state.login}</h1>
+                <div className="container" >
+                    <div className="roomlist">
+                        <ChannelList channels={this.state.channels} onSelectChannel={this.handleChannelSelect} onCreateChannel={this.handleCreateChannel} />
                     </div>
+
+                    <div className="content">
+                        <div className="bottom">
+                            <Room onSendMessage={this.handleSendMessage} channel={this.state.channel} login={this.state.login} />
+                        </div>
+                    </div>
+                    <div className="content">
+                        <UsersList channel={this.state.channel} users={this.state.users} socket={this.state.socket} />
+                    </div>
+
                 </div>
-                <div className="content">
-                    <UsersList channel={this.state.channel} users={this.state.users} socket={this.state.socket}/>
-                </div>
-                
             </div>
-        </div>
-    )
+        )
     }
 }
 
