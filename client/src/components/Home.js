@@ -121,7 +121,7 @@ class Home extends React.Component  {
 
         return (
             <div className="Home">
-            <h1>Bienvenue {this.state.login}</h1>
+            <h1 id="welcome">Bienvenue {this.state.login}</h1>
             <div className="container" >
                 <div className="roomlist">
                     <ChannelList channels={this.state.channels} onSelectChannel={this.handleChannelSelect} />
@@ -129,7 +129,7 @@ class Home extends React.Component  {
 
                 <div className="content">
                     <div className="bottom">
-                    <Room onSendMessage={this.handleSendMessage} channel={this.state.channel} />
+                    <Room onSendMessage={this.handleSendMessage} channel={this.state.channel} login={this.state.login}/>
                     </div>
                 </div>
             </div>

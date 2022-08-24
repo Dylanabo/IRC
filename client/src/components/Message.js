@@ -7,8 +7,9 @@ export class Message extends React.Component {
     render() {
         return (
             <div className='message-item'>
-                <div><b>{this.props.senderName}</b></div>
-                <span>{this.props.text}</span>
+                <br />
+                <div><b>{this.props.login}</b></div>
+                <span id="size">{this.props.text}</span>
             </div>
         )
     }

@@ -1,6 +1,10 @@
+body {
+    background-color: rgb(57, 35, 89);
+
+}
+
 .home {
-    display: block;
-    
+    display: block;    
 }
 
 .white {
@@ -12,7 +16,7 @@
 }
 
 .container {
-    background-color: rgb(0, 0, 0);
+    background-color: darkorchid;
     width: 100%;
     height: 100%;
     display: flex;
@@ -20,7 +24,9 @@
 }
 
 .content {
-    padding-left: 2%;
+    
+    opacity: initial;
+    padding-left: 1%;
     height: 100%;
     width: 65%;
     display: flex;
@@ -30,21 +36,57 @@
 .room {
     height: 100%;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.5);
     height: 60%;
 }
 
 .bottom {
-    margin-bottom: 40%;
+    border: 2px solid black;
+    background-color: rgb(120, 119, 119);
+    height: 800px;
+    width: 600;
     display: flex;
     flex-direction: row;
 }
 
-.roomlist {
-    background-color: rgba(67, 66, 66, 0.5);
-    border: 1px solid black;
-    width: 20%;
+.message-item {
+    font-size: 130%;
+    color: rgb(0, 0, 0);
+}
+
+.messages-input #send {
     height: 100%;
+    width: 20%;
+}
+
+.meesages-list {
+    width: auto;
+    overflow-y:auto;
+    height: 100%;
+}
+
+.messages-input {
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: auto;
+    border: 2px solid black;
+}
+
+.channel-item :hover{
+    background-color: darkorchid;
+}
+
+.channel-item {
+    font-size: 150%;
+}
+
+.roomlist {
+    margin-left: 0.5%;
+    background-color: rgb(79, 79, 79);
+    opacity: initial;
+    border: 2px solid black;
+    width: 20%;
+    max-height: fit-content;
     display: flex;
     flex-direction: column;
     color: rgb(255, 255, 255);
@@ -59,90 +101,18 @@
 
 }
 
+#welcome {
+    padding-left: 2.5%;
+    color: white;
+}
+
 #chat {
+    padding-top: 0%;
     background-color: rgba(67, 66, 66, 0.5);
     width: 100%;
     color: rgb(255, 255, 255);
 }
 
-.chat-app {
-    width: 100%;
-    height: 100%;
-    display: flex;
-}
-.chat-app .no-content-message {
-    color: #ccc;
-    font-style: italic;
-    font-size: 20px;
-    text-align: center;
-    margin: 20px;
-}
-.chat-app .channel-list {
-    width: calc(20% - 12px);
-    border: 1px solid #e0e0e0;
-    margin: 10px;
-    margin-right: 0;
-    border-right: none;
-    height: calc(100% - 22px);
-}
-.chat-app .channel-item {
-    border-bottom: 1px solid #e0e0e0;
-    padding: 10px;
-}
-.chat-app .channel-item div {
-    font-weight: bold;
-}
-.chat-app .channel-item span {
-    font-size: 10px;
-}
-.chat-app .channel-item:hover {
-    background-color: #e0e0e0;
-    cursor: pointer;
-}
-.chat-app .messages-panel {
-    width: calc(80% - 12px);
-    border: 1px solid #e0e0e0;
-    margin: 10px;
-    margin-left: 0;
-    height: calc(100% - 22px);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-.chat-app .messages-panel .meesages-list {
-    align-self: stretch;
-    height: 100%;
-}
-.chat-app .messages-panel .messages-input {
-    width: 100%;
-    height: 40px;
-    border-top: 1px solid #e0e0e0;
-    background-color: #f0f0f0;
-    display: flex;
-}
-.chat-app .messages-panel .messages-input input {
-    margin: auto;
-    height: 20px;
-    width: 100%;
-    margin-left: 15px;
-    border-radius: 15px;
-    border: 1px solid #e0e0e0;
-}
-.chat-app .messages-panel .messages-input input:focus {
-    border-radius: 15px;
-    border: 2px solid #66a6ff;
-    outline: none;
-}
-.chat-app .messages-panel .messages-input button {
-    width: 60px;
-    margin: auto 10px;
-    background-color: #0e62da;
-    color: white;
-    border: 1px solid;
-    border-radius: 10px;
-    padding: 5px 13px;
-}
-.chat-app .messages-panel .messages-input button:hover {
-    cursor: pointer;
-    background-color: #66a6ff;
+#size {
+    font-size: 120%;
 }
