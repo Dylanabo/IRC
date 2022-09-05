@@ -12,7 +12,7 @@ class Room extends React.Component {
             // normalement ca devrait marcher mais j'obtiens une erreur
             //"Cannot assign to read only property 'login' of object"
             //changer de nom avec la commande /nick
-          /*  if (this.state.input_value[0] == "/") {
+            if (this.state.input_value[0] == "/") {
                 let command = this.state.input_value.split(" ");
                 if (command[0] == "/nick") {
                     command.unshift();
@@ -21,11 +21,10 @@ class Room extends React.Component {
                     console.log(command);
                     this.props.login = command;
                 }
-            }  */
-
-            this.props.onSendMessage(this.props.channel.id, this.state.input_value);
-            this.setState({ input_value: ''});
-            
+            } else {
+                this.props.onSendMessage(this.props.channel.id, this.state.input_value);
+                this.setState({ input_value: ''});
+            }
         }
     }
 
