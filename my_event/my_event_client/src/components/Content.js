@@ -36,7 +36,6 @@ class Content extends Component {
       // console.log(event.target.value)
     }
 
-
   componentDidMount() {
     this.getEvents();
   }
@@ -47,28 +46,27 @@ class Content extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{display: "flex", flexDirection: "row"}}>
+      <div style={{display: "flex", flexDirection: "column"}}>
         <h2 className="my-5 text-center">Filtres</h2>
-        <div className="filter"></div>
-        ‍
-        <select value={this.state.filtre_input_cat} onChange={this.handleChange}>
-          <option value={"default"} hidden> Ville</option>
-         
-        </select>
-        <hr></hr>
-        <div className="next-steps my-5">
-          <h2 className="my-5 text-center">Events à venir</h2>
-          <ul>
+          <select value={this.state.filtre_input_cat} onChange={this.handleChange}>
+            <option value={"default"} hidden> Ville</option>
+          </select>
+      </div>
+      <hr></hr>
+      <div className="next-steps my-5">
+        <h2 className="my-5 text-center">Events à venir</h2>
+        <ul>
             {this.state.DataisLoaded &&
               this.state.items.map(item =>
-                <li key={item.recordid}>
-                  <p className="title">{item.fields.title_fr}</p>
+              <li key={item.recordid}>
+                <p className="title">{item.fields.title_fr}</p>
                   {item.fields.thumbnail && <img src={item.fields.thumbnail} className="icon" />}
                   {!item.fields.thumbnail && <img src={"./../assets/no_logo.png"} className="no-icon" />}
-                  <p className="description">{item.fields.description_fr}</p>
-                  <p className="end-date">Date de fin: {item.fields.lastdate_begin}</p>
+                <p className="description">{item.fields.description_fr}</p>
+                <p className="end-date">Date de fin: {item.fields.lastdate_begin}</p>
                   {/* <button> En savoir +</button> */}
-                </li>)
+              </li>)
             }
             {!this.state.DataisLoaded &&
               <div>
