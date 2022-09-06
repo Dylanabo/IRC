@@ -48,7 +48,7 @@ const NavBar = () => {
                   tag={RouterNavLink}
                   to="/"
                   exact
-                  activeClassName="router-link-exact-active"
+                  activeclassname="router-link-exact-active"
                 >
                   Home
                 </NavLink>
@@ -83,7 +83,7 @@ const NavBar = () => {
                       tag={RouterNavLink}
                       to="/profile"
                       className="dropdown-profile"
-                      activeClassName="router-link-exact-active"
+                      activeclassname="router-link-exact-active"
                     >
                       <FontAwesomeIcon icon="user" className="mr-3" /> Profile
                     </DropdownItem>
@@ -133,7 +133,7 @@ const NavBar = () => {
                   <FontAwesomeIcon icon="user" className="mr-3" />
                   <RouterNavLink
                     to="/profile"
-                    activeClassName="router-link-exact-active"
+                    activeclassname="router-link-exact-active"
                   >
                     Profile
                   </RouterNavLink>
