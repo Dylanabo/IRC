@@ -12,7 +12,7 @@ class Content extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount() { 
     fetch(
       "https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=&facet=tags&facet=placename&facet=department&facet=region&facet=city&facet=date_start&facet=date_end&facet=pricing_info&facet=updated_at&facet=city_district")
       .then((res) => res.json())
@@ -27,6 +27,9 @@ class Content extends Component {
 
   render() {
     return (
+      <div>
+        <h2 className="my-5 text-center">Filtres</h2>
+        <hr></hr>
       <div className="next-steps my-5">
         <h2 className="my-5 text-center">Events à venir</h2>
         <ul>
@@ -46,9 +49,10 @@ class Content extends Component {
               Fetching
             </div>
 
-          }
+}
         </ul>
       </div>
+    </div>
     );
   }
 }
