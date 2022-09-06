@@ -8,7 +8,9 @@ class Content extends Component {
 
     this.state = {
       items: [],
-      DataisLoaded: false
+      DataisLoaded: false,
+      categorie: 'select',
+      lieu: null
     };
   }
 
@@ -23,15 +25,29 @@ class Content extends Component {
         });
         console.log(json.records);
       })
-  }
+    }
+    
+    onChange(event) {
+      // this.setState({categorie: event.target.value})
+      // console.log(event.target.value)
+    }
 
-  render() {
-    return (
-      <div>
-        <h2 className="my-5 text-center">Filtres</h2>
-        <hr></hr>
-      <div className="next-steps my-5">
-        <h2 className="my-5 text-center">Events à venir</h2>
+    render() {
+      return (
+      <>
+        <div style={{display: "flex", flexDirection: "column"}}> 
+          <h2 className="my-5 text-center">Filtres</h2>
+          <select id="selectCategorie" onChange={this.onChange()} value={this.state.categorie}>
+            <option value="valeur1">Valeur 1</option>
+            <option value="valeur2" selected>Valeur 2</option>
+            <option value="valeur3">Valeur 3</option>
+          </select>
+          <br/>
+          <input type="text" value="Lieu"/>
+          <hr></hr>
+        </div>
+        <div className="next-steps my-5">
+          <h2 className="my-5 text-center">Events à venir</h2>
         <ul>
           {this.state.DataisLoaded &&
             this.state.items.map(item =>
@@ -48,11 +64,10 @@ class Content extends Component {
             <div>
               Fetching
             </div>
-
-}
+          }
         </ul>
-      </div>
-    </div>
+        </div>
+      </>
     );
   }
 }
