@@ -29,3 +29,17 @@
     padding-top: 2rem;
     padding-bottom: 2rem
 }
+
+.eventcontainer {
+    border-style: groove;
+
+}
+
+.title {
+    font-size: larger;
+    color: red;
+}
+
+.event {
+    border-style: dotted;
+}

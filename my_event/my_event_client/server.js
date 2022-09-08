@@ -18,3 +18,7 @@ app.use(
 app.use(express.static(join(__dirname, "build")));
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
+
+app.get(("/home"), function(req, res) {
+//  console.log(req)
+});

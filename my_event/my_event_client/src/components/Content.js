@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import Storage from 'localStorage'
+import Event from "./Event";
 import "./css/Content.css"
+
+import { useAuth0 } from "@auth0/auth0-react";
 
 const list = ['a', 'b', 'c'];
 
@@ -8,6 +12,7 @@ class Content extends Component {
     super(props);
 
     this.state = {
+      connected: false,
       items: [],
       DataisLoaded: false,
       categorie: 'select',
@@ -29,52 +34,40 @@ class Content extends Component {
         });
         console.log(json.records);
       })
-    }
-    
-    onChange(event) {
-      // this.setState({categorie: event.target.value})
-      // console.log(event.target.value)
-    }
+  }
 
   componentDidMount() {
     this.getEvents();
-  }
+      }
 
-  handleChange (event) {
+  handleChange(event) {
     this.setState({ filtre_input_cat: event.target.value })
   }
 
   render() {
     return (
-      <div style={{display: "flex", flexDirection: "row"}}>
-      <div style={{display: "flex", flexDirection: "column"}}>
-        <h2 className="my-5 text-center">Filtres</h2>
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h2 className="my-5 text-center">Filtres</h2>
           <select value={this.state.filtre_input_cat} onChange={this.handleChange}>
             <option value={"default"} hidden> Ville</option>
           </select>
-      </div>
-      <hr></hr>
-      <div className="next-steps my-5">
-        <h2 className="my-5 text-center">Events à venir</h2>
-        <ul>
+        </div>
+        <div className="eventcontainer">
+          <h2 className="my-5 text-center">Events à venir</h2>
+          <div className="" >
             {this.state.DataisLoaded &&
-              this.state.items.map(item =>
-              <li key={item.recordid}>
-                <p className="title">{item.fields.title_fr}</p>
-                  {item.fields.thumbnail && <img src={item.fields.thumbnail} className="icon" />}
-                  {!item.fields.thumbnail && <img src={"./../assets/no_logo.png"} className="no-icon" />}
-                <p className="description">{item.fields.description_fr}</p>
-                <p className="end-date">Date de fin: {item.fields.lastdate_begin}</p>
-                  {/* <button> En savoir +</button> */}
-              </li>)
-            }
+              this.state.items.map(item => 
+                <li key={item.fields.recordid} style={{listStyle: "none"}}>
+                  <Event ev={item}/>
+                </li>)}
             {!this.state.DataisLoaded &&
               <div>
                 Fetching
               </div>
 
             }
-          </ul>
+          </div>
         </div>
       </div >
     );
